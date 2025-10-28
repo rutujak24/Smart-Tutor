@@ -1,0 +1,1073 @@
+{
+  "results": {
+    "arc_easy": {
+      "alias": "arc_easy",
+      "acc,none": 0.8,
+      "acc_stderr,none": 0.13333333333333333,
+      "acc_norm,none": 0.5,
+      "acc_norm_stderr,none": 0.16666666666666666
+    }
+  },
+  "group_subtasks": {
+    "arc_easy": []
+  },
+  "configs": {
+    "arc_easy": {
+      "task": "arc_easy",
+      "tag": [
+        "ai2_arc"
+      ],
+      "dataset_path": "allenai/ai2_arc",
+      "dataset_name": "ARC-Easy",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "Question: {{question}}\nAnswer:",
+      "doc_to_target": "{{choices.label.index(answerKey)}}",
+      "unsafe_code": false,
+      "doc_to_choice": "{{choices.text}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "Question: {{question}}\nAnswer:",
+      "metadata": {
+        "version": 1.0,
+        "pretrained": "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit",
+        "peft": "KushalRamaiya/BigData_llama-3.1-8b-general",
+        "parallelize": true
+      }
+    }
+  },
+  "versions": {
+    "arc_easy": 1.0
+  },
+  "n-shot": {
+    "arc_easy": 0
+  },
+  "higher_is_better": {
+    "arc_easy": {
+      "acc": true,
+      "acc_norm": true
+    }
+  },
+  "n-samples": {
+    "arc_easy": {
+      "original": 2376,
+      "effective": 10
+    }
+  },
+  "samples": {
+    "arc_easy": [
+      {
+        "doc_id": 0,
+        "doc": {
+          "id": "Mercury_417466",
+          "question": "Which statement best explains why photosynthesis is the foundation of most food webs?",
+          "choices": {
+            "text": [
+              "Sunlight is the source of energy for nearly all ecosystems.",
+              "Most ecosystems are found on land instead of in water.",
+              "Carbon dioxide is more available than other gases.",
+              "The producers in all ecosystems are plants."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Sunlight is the source of energy for nearly all ecosystems."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Most ecosystems are found on land instead of in water."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Carbon dioxide is more available than other gases."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "The producers in all ecosystems are plants."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -39.25,
+              false
+            ]
+          ],
+          [
+            [
+              -51.5,
+              false
+            ]
+          ],
+          [
+            [
+              -46.5,
+              false
+            ]
+          ],
+          [
+            [
+              -42.5,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -39.25,
+            false
+          ],
+          [
+            -51.5,
+            false
+          ],
+          [
+            -46.5,
+            false
+          ],
+          [
+            -42.5,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "b91fe1a8fdc40a80b9364f6256ac729d010ba076b02e75a362c2cf7ad3303bdf",
+        "prompt_hash": "13cd5343190feea567e8061ed7e1f6e21d152a03708a7092ca1616ab02b67dce",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 1,
+        "doc": {
+          "id": "Mercury_7081673",
+          "question": "Which piece of safety equipment is used to keep mold spores from entering the respiratory system?",
+          "choices": {
+            "text": [
+              "safety goggles",
+              "breathing mask",
+              "rubber gloves",
+              "lead apron"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "safety goggles"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "breathing mask"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "rubber gloves"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "lead apron"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -30.25,
+              false
+            ]
+          ],
+          [
+            [
+              -23.5,
+              false
+            ]
+          ],
+          [
+            [
+              -29.625,
+              false
+            ]
+          ],
+          [
+            [
+              -31.625,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -30.25,
+            false
+          ],
+          [
+            -23.5,
+            false
+          ],
+          [
+            -29.625,
+            false
+          ],
+          [
+            -31.625,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "864be3c890aba1a77f2d3e9592fa7ec90942afb66250f0e99ac11b30a1330e5a",
+        "prompt_hash": "83fbbe529b6271ff27822cdd5ccbe90e1c6ea90454976c28f3b5bfbd0ecbf96e",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 2,
+        "doc": {
+          "id": "Mercury_7239733",
+          "question": "Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?",
+          "choices": {
+            "text": [
+              "brain cells",
+              "bone cells",
+              "muscle cells",
+              "ovary cells"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "brain cells"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "bone cells"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "muscle cells"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "ovary cells"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -28.0,
+              false
+            ]
+          ],
+          [
+            [
+              -30.125,
+              false
+            ]
+          ],
+          [
+            [
+              -30.0,
+              false
+            ]
+          ],
+          [
+            [
+              -26.875,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -28.0,
+            false
+          ],
+          [
+            -30.125,
+            false
+          ],
+          [
+            -30.0,
+            false
+          ],
+          [
+            -26.875,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "c79937cfecd9c1d852b0a65a6816710ce98507019ed48c57239077092a4963b6",
+        "prompt_hash": "a45814d40da595d897171144660c93057cc804c679c8c362a6c63345fa288b8f",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 3,
+        "doc": {
+          "id": "NYSEDREGENTS_2015_4_8",
+          "question": "Which characteristic describes the texture of a kitten's fur?",
+          "choices": {
+            "text": [
+              "gray",
+              "warm",
+              "long",
+              "soft"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which characteristic describes the texture of a kitten's fur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "gray"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which characteristic describes the texture of a kitten's fur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "warm"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which characteristic describes the texture of a kitten's fur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "long"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which characteristic describes the texture of a kitten's fur?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "soft"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -29.0,
+              false
+            ]
+          ],
+          [
+            [
+              -25.875,
+              false
+            ]
+          ],
+          [
+            [
+              -26.25,
+              false
+            ]
+          ],
+          [
+            [
+              -18.375,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -29.0,
+            false
+          ],
+          [
+            -25.875,
+            false
+          ],
+          [
+            -26.25,
+            false
+          ],
+          [
+            -18.375,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "0b1d32d8fff63c6f801aa24ea0d27d565a4433b59fa7720e7d2682c8b772594f",
+        "prompt_hash": "9a08d933eb3818f03a99d634eac3771e2d17d5a3507aeb24c180c046aa46b3c9",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 4,
+        "doc": {
+          "id": "Mercury_7037258",
+          "question": "Which best describes the structure of an atom?",
+          "choices": {
+            "text": [
+              "a lightweight core surrounded by neutral particles",
+              "a massive core surrounded by negatively-charged particles",
+              "a network of interacting positive and negative particles",
+              "overlapping layers of neutral, positive, and negative particles"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which best describes the structure of an atom?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "a lightweight core surrounded by neutral particles"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which best describes the structure of an atom?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "a massive core surrounded by negatively-charged particles"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which best describes the structure of an atom?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "a network of interacting positive and negative particles"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which best describes the structure of an atom?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "overlapping layers of neutral, positive, and negative particles"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -41.25,
+              false
+            ]
+          ],
+          [
+            [
+              -39.75,
+              false
+            ]
+          ],
+          [
+            [
+              -37.5,
+              false
+            ]
+          ],
+          [
+            [
+              -51.0,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -41.25,
+            false
+          ],
+          [
+            -39.75,
+            false
+          ],
+          [
+            -37.5,
+            false
+          ],
+          [
+            -51.0,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "d864a18b0f67ac89ae51c69c131dfb95a8d866e5b751391658f795dd173e0c28",
+        "prompt_hash": "c99d6ce4181344a3cf2337596746edacf5cd5724210ae2c94c234cc65fa72c99",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 5,
+        "doc": {
+          "id": "CSZ20679",
+          "question": "To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the",
+          "choices": {
+            "text": [
+              "meter.",
+              "kilometer.",
+              "light-year.",
+              "astronomical unit."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "meter."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "kilometer."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "light-year."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "astronomical unit."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -31.25,
+              false
+            ]
+          ],
+          [
+            [
+              -28.125,
+              false
+            ]
+          ],
+          [
+            [
+              -31.25,
+              false
+            ]
+          ],
+          [
+            [
+              -29.875,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -31.25,
+            false
+          ],
+          [
+            -28.125,
+            false
+          ],
+          [
+            -31.25,
+            false
+          ],
+          [
+            -29.875,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "2ad43d968ffc99e1b2a73c7757f38b272afcb3b9647a05c76ec5cf8f26281310",
+        "prompt_hash": "21313a5422fa2fe64972645964e7e83d3f58d4795b908f2644562b339d29aed4",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 6,
+        "doc": {
+          "id": "Mercury_182158",
+          "question": "A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?",
+          "choices": {
+            "text": [
+              "wash hands",
+              "turn off all equipment",
+              "put away all glassware",
+              "wash instruments and table tops"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "wash hands"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "turn off all equipment"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "put away all glassware"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "wash instruments and table tops"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -23.0,
+              false
+            ]
+          ],
+          [
+            [
+              -24.125,
+              false
+            ]
+          ],
+          [
+            [
+              -35.25,
+              false
+            ]
+          ],
+          [
+            [
+              -48.25,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -23.0,
+            false
+          ],
+          [
+            -24.125,
+            false
+          ],
+          [
+            -35.25,
+            false
+          ],
+          [
+            -48.25,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "f4474d28f6064f40d5343be38d4da2976befc1813be9490ec7b4772360cdac7d",
+        "prompt_hash": "8d34a972bf680815c7faf3f3fc8552b5e2048fd9f5d5a7a5691340c863f809a1",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 7,
+        "doc": {
+          "id": "Mercury_7216668",
+          "question": "Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?",
+          "choices": {
+            "text": [
+              "meters",
+              "centimeters",
+              "grams",
+              "milligrams"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "meters"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "centimeters"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "grams"
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "milligrams"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -24.625,
+              false
+            ]
+          ],
+          [
+            [
+              -23.25,
+              false
+            ]
+          ],
+          [
+            [
+              -14.125,
+              false
+            ]
+          ],
+          [
+            [
+              -17.5,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -24.625,
+            false
+          ],
+          [
+            -23.25,
+            false
+          ],
+          [
+            -14.125,
+            false
+          ],
+          [
+            -17.5,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "bdf22e417c39d42f49cafeb9731041d701e027adc75ffb8c8607ccfd9173b968",
+        "prompt_hash": "aace4de4327120efaae1d73ec8ad220f638045bb9de6e56f6722d31eee1a3259",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 8,
+        "doc": {
+          "id": "MCAS_2001_5_19",
+          "question": "Plants use sunlight to make",
+          "choices": {
+            "text": [
+              "soil.",
+              "minerals.",
+              "food.",
+              "water."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Plants use sunlight to make\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "soil."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Plants use sunlight to make\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "minerals."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Plants use sunlight to make\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "food."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Plants use sunlight to make\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "water."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -39.5,
+              false
+            ]
+          ],
+          [
+            [
+              -40.25,
+              false
+            ]
+          ],
+          [
+            [
+              -32.25,
+              false
+            ]
+          ],
+          [
+            [
+              -34.5,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -39.5,
+            false
+          ],
+          [
+            -40.25,
+            false
+          ],
+          [
+            -32.25,
+            false
+          ],
+          [
+            -34.5,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "53c446572bbe1742d595bca18fbb48e2afcd59aff9cd14aee84a7b08cd0b93f0",
+        "prompt_hash": "1d11f7595d5f1fc7f8edd50a290cdcc8f513f820aa2478e089cf93f356707173",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 9,
+        "doc": {
+          "id": "Mercury_SC_413631",
+          "question": "Which of these correctly identifies the way materials are transported in a plant?",
+          "choices": {
+            "text": [
+              "Xylem carries water from the roots to the leaves.",
+              "Phloem carries minerals from the roots to the leaves.",
+              "Xylem carries sugars from the flowers to the stems.",
+              "Phloem carries water from the flowers to the stems."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Xylem carries water from the roots to the leaves."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Phloem carries minerals from the roots to the leaves."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Xylem carries sugars from the flowers to the stems."
+          ],
+          [
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nQuestion: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+            "Phloem carries water from the flowers to the stems."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -45.25,
+              false
+            ]
+          ],
+          [
+            [
+              -51.75,
+              false
+            ]
+          ],
+          [
+            [
+              -63.5,
+              false
+            ]
+          ],
+          [
+            [
+              -68.0,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -45.25,
+            false
+          ],
+          [
+            -51.75,
+            false
+          ],
+          [
+            -63.5,
+            false
+          ],
+          [
+            -68.0,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "7f47698765741ab2d9dafc93bf09f3530b534f061a2319760dce0e0f55a6c91c",
+        "prompt_hash": "6875d8e7f30fe8f1e510ddfeeb81ad26b8dde8926fb191ba4c72e9d41c2aa7bb",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      }
+    ]
+  },
+  "config": {
+    "model": "hf",
+    "model_args": {
+      "pretrained": "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit",
+      "peft": "KushalRamaiya/BigData_llama-3.1-8b-general",
+      "parallelize": true
+    },
+    "model_num_parameters": 8114147328,
+    "model_dtype": "torch.bfloat16",
+    "model_revision": "main",
+    "model_sha": "f15c379fb32bb402fa06a7ae9aecb1febf4b79ec",
+    "peft_sha": "8c2f34bc93bf92f32cfb405bc53ac8d028b53171",
+    "batch_size": 1,
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": 10,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null,
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "248d983",
+  "date": 1761689035.1482785,
+  "pretty_env_info": "PyTorch version: 2.8.0+cu128\nIs debug build: False\nCUDA used to build PyTorch: 12.8\nROCM used to build PyTorch: N/A\n\nOS: Red Hat Enterprise Linux 9.6 (Plow) (x86_64)\nGCC version: (Spack GCC) 12.3.0\nClang version: Could not collect\nCMake version: version 3.26.5\nLibc version: glibc-2.34\n\nPython version: 3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:09:02) [GCC 11.2.0] (64-bit runtime)\nPython platform: Linux-5.14.0-570.37.1.el9_6.x86_64-x86_64-with-glibc2.34\nIs CUDA available: True\nCUDA runtime version: Could not collect\nCUDA_MODULE_LOADING set to: LAZY\nGPU models and configuration: \nGPU 0: NVIDIA L40S\nGPU 1: NVIDIA L40S\n\nNvidia driver version: 575.57.08\ncuDNN version: Could not collect\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: True\n\nCPU:\nArchitecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           52 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  64\nOn-line CPU(s) list:                     0-63\nVendor ID:                               GenuineIntel\nModel name:                              INTEL(R) XEON(R) GOLD 6548Y+\nCPU family:                              6\nModel:                                   207\nThread(s) per core:                      1\nCore(s) per socket:                      32\nSocket(s):                               2\nStepping:                                2\nCPU(s) scaling MHz:                      51%\nCPU max MHz:                             2500.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                5000.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 cat_l2 cdp_l3 intel_ppin cdp_l2 ssbd mba ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local split_lock_detect avx_vnni avx512_bf16 wbnoinvd dtherm ida arat pln pts hwp hwp_act_window hwp_epp hwp_pkg_req hfi vnmi avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq la57 rdpid bus_lock_detect cldemote movdiri movdir64b enqcmd fsrm md_clear serialize tsxldtrk pconfig arch_lbr ibt amx_bf16 avx512_fp16 amx_tile amx_int8 flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               3 MiB (64 instances)\nL1i cache:                               2 MiB (64 instances)\nL2 cache:                                128 MiB (64 instances)\nL3 cache:                                120 MiB (2 instances)\nNUMA node(s):                            4\nNUMA node0 CPU(s):                       0-15\nNUMA node1 CPU(s):                       16-31\nNUMA node2 CPU(s):                       32-47\nNUMA node3 CPU(s):                       48-63\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Vulnerable\nVulnerability Spectre v1:                Vulnerable: __user pointer sanitization and usercopy barriers only; no swapgs barriers\nVulnerability Spectre v2:                Vulnerable; IBPB: disabled; STIBP: disabled; PBRSB-eIBRS: Vulnerable; BHI: Vulnerable\nVulnerability Srbds:                     Not affected\nVulnerability Tsx async abort:           Not affected\n\nVersions of relevant libraries:\n[pip3] numpy==2.2.6\n[pip3] nvidia-cublas-cu12==12.8.4.1\n[pip3] nvidia-cuda-cupti-cu12==12.8.90\n[pip3] nvidia-cuda-nvrtc-cu12==12.8.93\n[pip3] nvidia-cuda-runtime-cu12==12.8.90\n[pip3] nvidia-cudnn-cu12==9.10.2.21\n[pip3] nvidia-cufft-cu12==11.3.3.83\n[pip3] nvidia-curand-cu12==10.3.9.90\n[pip3] nvidia-cusolver-cu12==11.7.3.90\n[pip3] nvidia-cusparse-cu12==12.5.8.93\n[pip3] nvidia-cusparselt-cu12==0.7.1\n[pip3] nvidia-nccl-cu12==2.27.3\n[pip3] nvidia-nvjitlink-cu12==12.8.93\n[pip3] nvidia-nvtx-cu12==12.8.90\n[pip3] torch==2.8.0\n[pip3] torchaudio==2.8.0\n[pip3] torchvision==0.23.0\n[pip3] triton==3.4.0\n[conda] numpy                                2.2.6            pypi_0              pypi\n[conda] nvidia-cublas-cu12                   12.8.4.1         pypi_0              pypi\n[conda] nvidia-cuda-cupti-cu12               12.8.90          pypi_0              pypi\n[conda] nvidia-cuda-nvrtc-cu12               12.8.93          pypi_0              pypi\n[conda] nvidia-cuda-runtime-cu12             12.8.90          pypi_0              pypi\n[conda] nvidia-cudnn-cu12                    9.10.2.21        pypi_0              pypi\n[conda] nvidia-cufft-cu12                    11.3.3.83        pypi_0              pypi\n[conda] nvidia-curand-cu12                   10.3.9.90        pypi_0              pypi\n[conda] nvidia-cusolver-cu12                 11.7.3.90        pypi_0              pypi\n[conda] nvidia-cusparse-cu12                 12.5.8.93        pypi_0              pypi\n[conda] nvidia-cusparselt-cu12               0.7.1            pypi_0              pypi\n[conda] nvidia-nccl-cu12                     2.27.3           pypi_0              pypi\n[conda] nvidia-nvjitlink-cu12                12.8.93          pypi_0              pypi\n[conda] nvidia-nvtx-cu12                     12.8.90          pypi_0              pypi\n[conda] torch                                2.8.0            pypi_0              pypi\n[conda] torchaudio                           2.8.0            pypi_0              pypi\n[conda] torchvision                          0.23.0           pypi_0              pypi\n[conda] triton                               3.4.0            pypi_0              pypi",
+  "transformers_version": "4.57.1",
+  "lm_eval_version": "0.4.9.1",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<|finetune_right_pad_id|>",
+    "128004"
+  ],
+  "tokenizer_eos_token": [
+    "<|eot_id|>",
+    "128009"
+  ],
+  "tokenizer_bos_token": [
+    "<|begin_of_text|>",
+    "128000"
+  ],
+  "eot_token_id": 128009,
+  "max_length": 131072
+}
