@@ -9,7 +9,7 @@ from transformers import (
     DistilBertModel, 
     DistilBertTokenizer
 )
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 import json
 
 
@@ -190,7 +190,7 @@ class RouterInference:
         self, 
         query: str,
         return_confidence: bool = True
-    ) -> Dict[str, any]:
+    ) -> Dict[str, Any]:
         """
         Route a single query to the appropriate category.
         
@@ -242,7 +242,7 @@ class RouterInference:
         queries: List[str],
         batch_size: int = 32,
         return_confidence: bool = True
-    ) -> List[Dict[str, any]]:
+    ) -> List[Dict[str, Any]]:
         """
         Route multiple queries in batches.
         
