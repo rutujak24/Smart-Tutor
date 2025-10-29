@@ -13,10 +13,16 @@ import argparse
 from tqdm import tqdm
 import os
 from typing import Dict, List
-import wandb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 import numpy as np
+
+# Optional wandb import - only required if using --wandb_project
+try:
+    import wandb
+    WANDB_AVAILABLE = True
+except ImportError:
+    WANDB_AVAILABLE = False
 
 
 class RouterDataset(Dataset):
@@ -217,6 +223,11 @@ def main():
     
     # Initialize wandb if specified
     if args.wandb_project:
+        if not WANDB_AVAILABLE:
+            raise ImportError(
+                "wandb is required when using --wandb_project. "
+                "Install it with: pip install wandb"
+            )
         wandb.init(project=args.wandb_project, config=vars(args))
     
     # Set device
