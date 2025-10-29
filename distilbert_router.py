@@ -7,9 +7,7 @@ import torch
 import torch.nn as nn
 from transformers import (
     DistilBertModel, 
-    DistilBertTokenizer, 
-    DistilBertConfig,
-    DistilBertForSequenceClassification
+    DistilBertTokenizer
 )
 from typing import Dict, List, Optional, Tuple
 import json
