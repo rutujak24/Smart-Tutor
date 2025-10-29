@@ -1,1 +1,1 @@
-# CS-6200-Project
+# CS-6200 Project
