@@ -11,7 +11,6 @@ from transformers import (
 )
 from typing import Dict, List, Optional, Tuple
 import json
-import numpy as np
 
 
 class DistilBertRouter(nn.Module):
