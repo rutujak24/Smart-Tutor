@@ -100,7 +100,7 @@ def route_batch_queries(
     
     # Save results if requested
     if output_file:
-        os.makedirs(os.path.dirname(output_file) if os.path.dirname(output_file) else ".", 
+        os.makedirs(os.path.dirname(output_file) or ".", 
                     exist_ok=True)
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(results, f, indent=2)
