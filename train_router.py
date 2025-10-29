@@ -115,6 +115,9 @@ def train_epoch(
     model.train()
     total_loss = 0
     
+    # Instantiate loss function once outside the loop
+    loss_fn = nn.CrossEntropyLoss()
+    
     progress_bar = tqdm(dataloader, desc=f"Epoch {epoch}")
     
     for batch in progress_bar:
@@ -127,7 +130,6 @@ def train_epoch(
         outputs = model(input_ids, attention_mask)
         
         # Compute loss
-        loss_fn = nn.CrossEntropyLoss()
         loss = loss_fn(outputs["logits"], labels)
         
         # Backward pass
