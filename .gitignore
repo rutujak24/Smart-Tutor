@@ -1,5 +1,7 @@
-# Python
+.venv/
+router_model/router_model.pt
+router_model_pt.tar.gz
+*.pyc
 __pycache__/
-*.py[cod]
-*.class
-*.so
+data/
+exports/
