@@ -1,0 +1,9 @@
+{
+  "num_labels": 4,
+  "category_names": [
+    "code",
+    "commonsense",
+    "math",
+    "science"
+  ]
+}
