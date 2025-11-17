@@ -67,7 +67,7 @@ class DistilBertRouter(DistilBertPreTrainedModel):
         }
         with open(os.path.join(save_dir, "router_config.json"), "w") as f:
             json.dump(meta, f, indent=2)
-        print(f"✅ Router model saved to {save_dir}")
+        print(f"Router model saved to {save_dir}")
 
     @classmethod
     def load_pretrained(cls, save_dir: str, config, device: str = None):
@@ -131,7 +131,7 @@ class RouterInference:
 if __name__ == "__main__":
     from transformers import DistilBertTokenizer, DistilBertConfig
 
-    print("🔍 Testing DistilBERT Router...")
+    print("Testing DistilBERT Router...")
 
     categories = ["code", "commonsense", "general", "math", "science"]
     cfg = DistilBertConfig.from_pretrained("distilbert-base-uncased")
