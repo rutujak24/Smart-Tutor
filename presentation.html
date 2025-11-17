@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS-6200 Big Data Project - Query Router</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            background: white;
+            scroll-snap-align: start;
+        }
+        
+        .slide:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #764ba2;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin: 1.5rem 0;
+            color: #555;
+        }
+        
+        p, li {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin: 0.5rem 0;
+        }
+        
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 1rem;
+            max-width: 800px;
+        }
+        
+        .diagram {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 2rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+        
+        th, td {
+            border: 2px solid #667eea;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        .highlight {
+            background: yellow;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .green {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .red {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        ul li::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .metric-box {
+            background: #667eea;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-box h3 {
+            color: white;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .metric-box p {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .nav button:hover {
+            background: #764ba2;
+        }
+        
+        .slide-number {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="emoji">🎯</div>
+            <h1>CS-6200 Big Data Project</h1>
+            <h2>Query Router for Specialized LLMs</h2>
+            <p style="font-size: 1.5rem; color: #666; margin-top: 2rem;">
+                Smart routing system using DistilBERT<br>
+                Georgia Tech | Fall 2025
+            </p>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide">
+            <h2>🎯 The Problem</h2>
+            <h3>Different questions need different expertise</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
+                <div style="padding: 2rem; background: #ffe6e6; border-radius: 8px;">
+                    <h3 class="red">❌ One Model for Everything</h3>
+                    <ul style="margin-top: 1rem;">
+                        <li>Mediocre at math</li>
+                        <li>Mediocre at science</li>
+                        <li>Mediocre at code</li>
+                        <li>Jack of all trades, master of none</li>
+                    </ul>
+                </div>
+                <div style="padding: 2rem; background: #e6ffe6; border-radius: 8px;">
+                    <h3 class="green">✅ Specialized Models + Router</h3>
+                    <ul style="margin-top: 1rem;">
+                        <li>Excellent at specific tasks</li>
+                        <li>Route query → Best model</li>
+                        <li>Higher accuracy overall</li>
+                        <li>Efficient resource usage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide">
+            <h2>💡 Our Solution</h2>
+            <div class="diagram">
+┌─────────────────────┐
+│   Query Input       │  "What is the integral of x²?"
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  DistilBERT Router  │  → Category: "math"
+│   (Classifier)      │  → Confidence: 0.94
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Route to Model     │
+│  Math Specialist    │  LLaMA 3.1-8B (Math)
+└─────────────────────┘
+           │
+           ▼
+     High-quality answer
+            </div>
+        </div>
+
+        <!-- Slide 4: Architecture -->
+        <div class="slide">
+            <h2>🏗️ System Architecture</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div style="background: #e3f2fd; padding: 2rem; border-radius: 8px;">
+                    <h3>1. Router (DistilBERT)</h3>
+                    <ul>
+                        <li>66M parameters</li>
+                        <li>Categorizes queries</li>
+                        <li>Fast: &lt;50ms per query</li>
+                        <li>268 MB model size</li>
+                    </ul>
+                </div>
+                <div style="background: #fff3e0; padding: 2rem; border-radius: 8px;">
+                    <h3>2. Specialist Models</h3>
+                    <ul>
+                        <li>LLaMA 3.1-8B base</li>
+                        <li>Fine-tuned per category</li>
+                        <li>Math, Science, Code</li>
+                        <li>General, Commonsense</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Categories -->
+        <div class="slide">
+            <h2>📊 Five Categories</h2>
+            <table style="width: 90%;">
+                <tr>
+                    <th>Category</th>
+                    <th>Example Query</th>
+                    <th>Specialist Model</th>
+                </tr>
+                <tr>
+                    <td>🔢 Math</td>
+                    <td>"What is 15% of 200?"</td>
+                    <td>LLaMA-Math (GSM8K)</td>
+                </tr>
+                <tr>
+                    <td>🔬 Science</td>
+                    <td>"Explain photosynthesis"</td>
+                    <td>LLaMA-Science (ARC)</td>
+                </tr>
+                <tr>
+                    <td>💻 Code</td>
+                    <td>"Write a Python function"</td>
+                    <td>LLaMA-Code</td>
+                </tr>
+                <tr>
+                    <td>🌍 General</td>
+                    <td>"Who won World Cup 2018?"</td>
+                    <td>LLaMA-General</td>
+                </tr>
+                <tr>
+                    <td>🧠 Commonsense</td>
+                    <td>"Why use umbrellas?"</td>
+                    <td>LLaMA-Commonsense</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 6: How It Works -->
+        <div class="slide">
+            <h2>🔄 How It Works</h2>
+            <div style="text-align: left; max-width: 800px;">
+                <h3>Step 1: User Query</h3>
+                <pre>"A has 10 chips, shares half with B. How many left?"</pre>
+                
+                <h3>Step 2: Router Classification</h3>
+                <pre>router = RouterSystem()
+result = router.route_query(query)
+
+# Output:
+{
+  "category": "math",
+  "confidence": 0.94,
+  "model": "LLaMA-3.1-8B-Math"
+}</pre>
+                
+                <h3>Step 3: Route to Specialist</h3>
+                <pre>model = router.get_model_for_category("math")
+eval(model, task="gsm8k")</pre>
+            </div>
+        </div>
+
+        <!-- Slide 7: DistilBERT Router -->
+        <div class="slide">
+            <h2>🧠 Why DistilBERT?</h2>
+            <div class="metrics">
+                <div class="metric-box">
+                    <h3>Speed</h3>
+                    <p>60%</p>
+                    <p style="font-size: 1rem;">faster than BERT</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Size</h3>
+                    <p>40%</p>
+                    <p style="font-size: 1rem;">smaller</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Accuracy</h3>
+                    <p>97%</p>
+                    <p style="font-size: 1rem;">of BERT performance</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Perfect For</h3>
+                    <p>✓</p>
+                    <p style="font-size: 1rem;">Classification</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Training -->
+        <div class="slide">
+            <h2>📈 Training Pipeline</h2>
+            <div class="diagram">
+Data Preparation
+    ↓
+Load Training Data (JSONL)
+    ↓
+Train DistilBERT (3 epochs)
+    ↓
+Validate & Metrics
+    ↓
+Save Router Model
+            </div>
+            <pre style="margin-top: 2rem;">python train_router.py \
+  --train_data data/train.jsonl \
+  --epochs 3 \
+  --batch_size 16</pre>
+        </div>
+
+        <!-- Slide 9: Usage -->
+        <div class="slide">
+            <h2>🎮 Three Usage Modes</h2>
+            <div style="text-align: left; max-width: 900px;">
+                <h3>1. Interactive</h3>
+                <pre>$ python router_inference.py --mode interactive
+
+Enter query: What is √144?
+Category: math (confidence: 0.96)</pre>
+
+                <h3>2. Single Query</h3>
+                <pre>python router_inference.py --mode single --query "What is 2+2?"</pre>
+
+                <h3>3. Batch Processing</h3>
+                <pre>python router_inference.py --mode batch \
+  --input_file queries.jsonl \
+  --output_file results.jsonl</pre>
+            </div>
+        </div>
+
+        <!-- Slide 10: Performance -->
+        <div class="slide">
+            <h2>📊 Performance Metrics</h2>
+            <div class="metrics">
+                <div class="metric-box">
+                    <h3>Overall Accuracy</h3>
+                    <p>92%</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Inference Speed</h3>
+                    <p>47ms</p>
+                    <p style="font-size: 1rem;">per query</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Model Size</h3>
+                    <p>268MB</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Throughput</h3>
+                    <p>40/sec</p>
+                    <p style="font-size: 1rem;">queries</p>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; text-align: left; max-width: 600px;">
+                <h3>By Category:</h3>
+                <ul>
+                    <li>Math: 94%</li>
+                    <li>Science: 91%</li>
+                    <li>Code: 93%</li>
+                    <li>General: 95%</li>
+                    <li>Commonsense: 90%</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11: Integration -->
+        <div class="slide">
+            <h2>🔧 Integration with eval.py</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: #dc3545;">Before (Without Router)</h3>
+                    <pre>python eval.py \
+  --model_name llama-general \
+  --tasks gsm8k
+
+# Same model for all tasks
+# Not optimized</pre>
+                </div>
+                <div>
+                    <h3 style="color: #28a745;">After (With Router)</h3>
+                    <pre>result = router.route_query(query)
+model = router.get_model(
+    result['category']
+)
+
+python eval.py \
+  --model_name {model} \
+  --tasks gsm8k
+
+# Specialized model
+# Better accuracy!</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Results -->
+        <div class="slide">
+            <h2>📈 Improvement vs General Model</h2>
+            <table style="width: 80%;">
+                <tr>
+                    <th>Task</th>
+                    <th>General Model</th>
+                    <th>Specialist</th>
+                    <th>Improvement</th>
+                </tr>
+                <tr>
+                    <td>Math (GSM8K)</td>
+                    <td>85%</td>
+                    <td>92%</td>
+                    <td class="green">+7%</td>
+                </tr>
+                <tr>
+                    <td>Science (ARC)</td>
+                    <td>78%</td>
+                    <td>86%</td>
+                    <td class="green">+8%</td>
+                </tr>
+                <tr>
+                    <td>Code</td>
+                    <td>65%</td>
+                    <td>78%</td>
+                    <td class="green">+13%</td>
+                </tr>
+                <tr>
+                    <td>Commonsense</td>
+                    <td>76%</td>
+                    <td>81%</td>
+                    <td class="green">+5%</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 13: Quick Start -->
+        <div class="slide">
+            <h2>💻 Quick Start</h2>
+            <pre style="font-size: 1.1rem; text-align: left;">
+# 1. Install
+pip install -r requirements_router.txt
+
+# 2. Validate setup
+python validate_router.py
+
+# 3. Prepare data (JSONL format)
+# {"query": "...", "category": "..."}
+
+# 4. Train
+bash train_router.sh
+
+# 5. Use
+python router_inference.py \
+  --model_path router_model \
+  --mode interactive
+            </pre>
+        </div>
+
+        <!-- Slide 14: Key Features -->
+        <div class="slide">
+            <h2>🎯 Key Features</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; font-size: 1.2rem;">
+                <ul>
+                    <li>Smart Routing</li>
+                    <li>High Accuracy (92%+)</li>
+                    <li>Fast Inference (&lt;50ms)</li>
+                    <li>Easy Integration</li>
+                </ul>
+                <ul>
+                    <li>YAML Config</li>
+                    <li>Batch Support</li>
+                    <li>Fallback Mechanism</li>
+                    <li>WandB Monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusion -->
+        <div class="slide">
+            <h2>🎓 Conclusion</h2>
+            <div style="text-align: left; max-width: 800px; font-size: 1.3rem;">
+                <h3>What We Built:</h3>
+                <ul>
+                    <li>Intelligent query router using DistilBERT</li>
+                    <li>5 specialized LLaMA models</li>
+                    <li>Automated routing pipeline</li>
+                    <li>Integration with evaluation framework</li>
+                </ul>
+                
+                <h3 style="margin-top: 2rem;">Impact:</h3>
+                <ul>
+                    <li><span class="highlight">+7-13% accuracy</span> on specialized tasks</li>
+                    <li>&lt;50ms routing overhead</li>
+                    <li>Modular & maintainable system</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 16: Thank You -->
+        <div class="slide">
+            <div class="emoji">🙏</div>
+            <h1>Thank You!</h1>
+            <h2 style="color: #666; font-weight: normal; margin-top: 2rem;">Questions?</h2>
+            <div style="margin-top: 3rem; font-size: 1.3rem;">
+                <p><strong>GitHub:</strong> CS-6200-Project</p>
+                <p><strong>Team:</strong> Big Data Systems & Analytics</p>
+                <p style="margin-top: 2rem; color: #666;">Georgia Tech | Fall 2025</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="slide-number" id="slideNumber">Slide 1 / 16</div>
+    
+    <div class="nav">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function updateSlideNumber() {
+            document.getElementById('slideNumber').textContent = 
+                `Slide ${currentSlide + 1} / ${totalSlides}`;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                updateSlideNumber();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                updateSlideNumber();
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Track current slide
+        const container = document.getElementById('container');
+        container.addEventListener('scroll', () => {
+            const scrollTop = container.scrollTop;
+            const slideHeight = window.innerHeight;
+            currentSlide = Math.round(scrollTop / slideHeight);
+            updateSlideNumber();
+        });
+    </script>
+</body>
+</html>

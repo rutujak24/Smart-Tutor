@@ -161,9 +161,9 @@ with open(TEST_OUT, "w") as f:
     for r in test:
         f.write(json.dumps(r) + "\n")
 
-print(f"\n✅ Saved training set → {TRAIN_OUT} ({len(train)} samples)")
-print(f"✅ Saved test set     → {TEST_OUT} ({len(test)} samples)")
-print("🧩 Categories verified: ['science', 'math', 'general']")
+print(f"\nSaved training set → {TRAIN_OUT} ({len(train)} samples)")
+print(f" Saved test set     → {TEST_OUT} ({len(test)} samples)")
+print(" Categories verified: ['science', 'math', 'general']")
 
 # ============================================================
 # Verify label balance
