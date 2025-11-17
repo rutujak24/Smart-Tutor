@@ -1,55 +1,16 @@
-# DistilBERT Router Configuration
-# Maps task categories to specialized model endpoints
-
-# Task categories the router can classify
 categories:
+  - code
+  - commonsense
+  - general
   - math
   - science
-  - general
-  - commonsense
-  - code
 
-# Model mappings - which model to use for each category
-model_mappings:
-  math:
-    model_name: "KushalRamaiya/BigData_llama-3.1-8b-math"
-    description: "Specialized for mathematical reasoning and problem solving"
-  
-  science:
-    model_name: "KushalRamaiya/BigData_llama-3.1-8b-science"
-    description: "Specialized for science questions (physics, biology, chemistry)"
-  
-  general:
-    model_name: "KushalRamaiya/BigData_llama-3.1-8b-general"
-    description: "General knowledge and trivia"
-  
-  commonsense:
-    model_name: "KushalRamaiya/BigData_llama-3.1-8b-commonsense"
-    description: "Common sense reasoning"
-  
-  code:
-    model_name: "KushalRamaiya/BigData_llama-3.1-8b-code"
-    description: "Code generation and programming tasks"
-
-# Router model configuration
-router_config:
-  model_name: "distilbert-base-uncased"
-  max_length: 512
-  batch_size: 32
-  confidence_threshold: 0.5  # Minimum confidence to use specialized model
-
-# Default fallback model (if confidence is low)
-fallback_model:
-  model_name: "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
-  description: "Base model for low-confidence predictions"
-
-# Dataset category mappings for training
 dataset_category_mapping:
-  gsm8k: "math"
-  openbookqa: "science"
-  arc_easy: "science"
-  arc_challenge: "science"
-  trivia_qa: "general"
-  commonsense_qa: "commonsense"
-  humaneval: "code"
-  mbpp: "code"
+  gsm8k: math
+  openbookqa: science
+  arc_easy: science
+  arc_challenge: science
+  trivia_qa: general
+  commonsense_qa: commonsense
+  humaneval: code
+  mbpp: code

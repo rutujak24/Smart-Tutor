@@ -1,0 +1,119 @@
+# === Core deep learning stack ===
+torch==2.8.0+cu128
+torchvision==0.19.0+cu128
+torchaudio==2.8.0+cu128
+# if prebuilt CUDA wheels aren't auto-resolved:
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+transformers==4.57.1
+datasets==3.1.0
+tokenizers>=0.20.0
+sentencepiece
+accelerate==0.33.0
+
+# === Unsloth (for fast Llama adapters) ===
+unsloth==2025.10.12
+bitsandbytes==0.44.1
+xformers==0.0.27.post2
+
+# === Model / training utilities ===
+scikit-learn==1.5.2
+pandas
+numpy
+tqdm
+matplotlib
+seaborn
+
+# === API & deployment ===
+fastapi==0.115.4
+uvicorn==0.30.6
+gunicorn==23.0.0
+
+# === Optional: sanity / environment ===
+pyyaml
+huggingface-hub==0.24.6
+# -----------------------------
+# Core Deep Learning Stack
+# -----------------------------
+torch==2.8.0+cu128
+torchvision==0.19.0+cu128
+torchaudio==2.8.0+cu128
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+# -----------------------------
+# Hugging Face + Unsloth ecosystem
+# -----------------------------
+unsloth==2025.10.12
+transformers==4.57.1
+accelerate==1.10.1
+trl==0.10.1
+bitsandbytes==0.44.1
+
+# Unsloth internal fork dependencies (patched PEFT etc.)
+# These will be handled automatically by unsloth, but pinned for reproducibility
+peft==0.13.0
+
+# -----------------------------
+# Data + Training Utilities
+# -----------------------------
+datasets==3.1.0
+sentencepiece==0.2.0
+hf_transfer==0.1.9
+protobuf==6.33.0
+pyyaml==6.0.2
+tqdm==4.66.5
+filelock==3.16.1
+
+# -----------------------------
+# Numerical + Scientific
+# -----------------------------
+numpy==1.26.4
+numba==0.58.1
+scikit-learn==1.5.2
+scipy==1.15.3
+pandas==2.3.3
+
+# -----------------------------
+# Audio + Text Utils (for transformers audio imports)
+# -----------------------------
+librosa==0.10.2.post1
+soundfile==0.12.1
+
+# -----------------------------
+# Visualization / Misc
+# -----------------------------
+matplotlib==3.9.2
+seaborn==0.13.2
+jinja2==3.1.4
+
+# -----------------------------
+# CLI + Environment Tools
+# -----------------------------
+huggingface-hub==0.25.2
+tyro==0.8.6
+wheel==0.45.0
+torch==2.8.0+cu128
+torchvision==0.19.0+cu128
+torchaudio==2.8.0+cu128
+transformers==4.57.1
+unsloth==2025.10.12
+accelerate==1.2.1
+bitsandbytes==0.44.1
+sentencepiece==0.2.0
+tokenizers==0.20.0
+datasets==3.1.0
+peft==0.14.0
+protobuf==5.28.3
+scipy
+numpy
+pandas
+tqdm
+
+
+
+export UNSLOTH_DISABLE_FLASH_ATTENTION=1
+export UNSLOTH_FORCE_XFORMERS=1
+export HF_HOME=/home/hice1/rswaminathan38/scratch/CS-6200-Project_ram/hf_cache
+export HF_HUB_CACHE=$HF_HOME
+export HF_DATASETS_CACHE=$HF_HOME
+
