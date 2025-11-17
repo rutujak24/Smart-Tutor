@@ -1,0 +1,8 @@
+{
+  "num_labels": 3,
+  "category_names": [
+    "general",
+    "math",
+    "science"
+  ]
+}
