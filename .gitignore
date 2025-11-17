@@ -3,3 +3,5 @@ __pycache__/
 *.py[cod]
 *.class
 *.so
+router_model/router_model.pt
+router_model_pt.tar.gz
