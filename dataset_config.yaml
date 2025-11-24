@@ -1,0 +1,52 @@
+datasets:
+  gsm8k:
+    path: "openai/gsm8k"
+    config: "main"
+    split: "train"
+    limit: null
+    category: "math"
+    instruction_field: "question"
+    output_field: "answer"
+    input_field: null
+    choices_field: null
+    answer_key_field: null
+    include_choices_in_instruction: false
+
+  openbookqa:
+    path: "allenai/openbookqa"
+    config: "main"
+    split: "train"
+    limit: null
+    category: "science"
+    instruction_field: "question_stem"
+    output_field: "answerKey"
+    input_field: null
+    choices_field: "choices"
+    answer_key_field: "answerKey"
+    include_choices_in_instruction: true
+
+  trivia_qa:
+    path: "mandarjoshi/trivia_qa"
+    config: "rc.wikipedia"
+    split: "train+validation+test"
+    limit: null
+    category: "general"
+    instruction_field: "question"
+    output_field: "answer.value"
+    input_field: null
+    choices_field: null
+    answer_key_field: null
+    include_choices_in_instruction: false
+
+  commonsense_qa:
+    path: "tau/commonsense_qa"
+    config: null
+    split: "train+validation+test"
+    limit: null
+    category: "general"
+    instruction_field: "question"
+    output_field: "answerKey"
+    input_field: null
+    choices_field: "choices"
+    answer_key_field: "answerKey"
+    include_choices_in_instruction: true
