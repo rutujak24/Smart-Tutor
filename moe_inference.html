@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MoE Chat | Llama-3.1 8B + DeBERTa Router</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    /* =====================
+       GLOBAL STYLING
+    ====================== */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", sans-serif;
+        background: #f0f2f5;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    .dark {
+        background: #121212;
+        color: white;
+    }
+
+    /* Chat container */
+    .chat-container {
+        width: 100%;
+        max-width: 850px;
+        margin: 0 auto;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    /* Header */
+    .header {
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    /* Chat messages area */
+    .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        scroll-behavior: smooth;
+        background: rgba(255,255,255,0.35);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+    }
+
+    /* Chat bubbles */
+    .msg {
+        max-width: 75%;
+        padding: 12px 16px;
+        border-radius: 16px;
+        line-height: 1.5;
+        animation: fadeIn 0.3s ease;
+        white-space: pre-wrap;
+    }
+
+    .user {
+        background: #0078ff;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+    }
+
+    .bot {
+        background: #e8e8e8;
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+    }
+
+    .dark .bot {
+        background: #333;
+    }
+
+    /* Expert badge */
+    .badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 6px;
+        color: white;
+    }
+    .GENERAL { background: #0078ff; }
+    .MATH { background: #2ecc71; }
+    .SCIENCE { background: #9b59b6; }
+
+    /* Typing dots */
+    .typing {
+        width: 40px;
+        height: 20px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    .typing div {
+        width: 8px;
+        height: 8px;
+        background: gray;
+        border-radius: 50%;
+        animation: bounce 0.9s infinite;
+    }
+    .typing div:nth-child(2) { animation-delay: 0.2s; }
+    .typing div:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+        0%, 80%, 100% { transform: scale(0.5); }
+        40% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Input bar */
+    .input-bar {
+        display: flex;
+        gap: 10px;
+        padding: 20px 0;
+    }
+
+    textarea {
+        flex: 1;
+        resize: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #aaa;
+        min-height: 45px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .dark textarea {
+        background: #222;
+        color: white;
+        border: 1px solid #555;
+    }
+
+    button {
+        padding: 0 20px;
+        background: #0078ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* Dark Mode Toggle */
+    .toggle {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        cursor: pointer;
+        font-size: 22px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="toggle" onclick="toggleDarkMode()">🌙</div>
+
+<div class="chat-container">
+
+    <div class="header">MoE Llama-3.1 Chat</div>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="input-bar">
+        <textarea id="input" placeholder="Type a message..."></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    const API_URL = "http://localhost:8510/chat";
+    const messagesDiv = document.getElementById("messages");
+    const input = document.getElementById("input");
+
+    /* =============== DARK MODE =============== */
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+        document.querySelector(".toggle").textContent =
+            document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
+
+    /* =============== SEND MESSAGE =============== */
+    function sendMessage() {
+        let text = input.value.trim();
+        if (!text) return;
+
+        addUserMessage(text);
+        input.value = "";
+        input.style.height = "45px";
+
+        // Add typing indicator
+        const typing = document.createElement("div");
+        typing.className = "msg bot";
+        typing.innerHTML = `
+            <div class="typing">
+                <div></div><div></div><div></div>
+            </div>`;
+        messagesDiv.appendChild(typing);
+        scrollBottom();
+
+        fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: text })
+        })
+        .then(r => r.json())
+        .then(data => {
+            messagesDiv.removeChild(typing);
+
+            addBotMessage(data.response, data.expert);
+        })
+        .catch(err => {
+            messagesDiv.removeChild(typing);
+            addBotMessage("❌ API error: " + err, "GENERAL");
+        });
+    }
+
+    /* =============== RENDER USER MSG =============== */
+    function addUserMessage(text) {
+        const msg = document.createElement("div");
+        msg.className = "msg user";
+        msg.textContent = text;
+        messagesDiv.appendChild(msg);
+        scrollBottom();
+    }
+
+    /* =============== RENDER BOT MSG =============== */
+    function addBotMessage(text, expert) {
+        const msg = document.createElement("div");
+        msg.className = "msg bot";
+
+        msg.innerHTML = `
+            <span class="badge ${expert}">${expert} EXPERT</span><br>
+            ${text}
+        `;
+
+        messagesDiv.appendChild(msg);
+        scrollBottom();
+    }
+
+    /* Auto-scroll */
+    function scrollBottom() {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    /* Enter key sends */
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    /* Auto-resize input */
+    input.addEventListener("input", () => {
+        input.style.height = "45px";
+        input.style.height = input.scrollHeight + "px";
+    });
+
+</script>
+
+</body>
+</html>
